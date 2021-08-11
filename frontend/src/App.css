@@ -28,7 +28,7 @@
   color: #61dafb;
 }
 
-.navbar-expand .navbar-nav .nav-link{
+.navbar-expand .navbar-nav .nav-link {
   margin-right: 2rem;
   border: solid;
   border-width: 1px;
@@ -37,7 +37,48 @@
   color: rgb(201, 201, 206);
 }
 
+.list-group-item {
+  position: relative;
+  display: block;
+  padding: 0.5rem 1rem;
+  color: #212529;
+  text-decoration: none;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
 
+li {
+  text-align: left;
+}
+
+.cards {
+  width: 100%;
+  margin-top: 20px;
+  padding-right: 15px;
+  padding-left: 15px;
+  padding-bottom: 15px;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.card {
+  width: 18rem;
+  display: inline-block;
+  margin: 0 10px 0 0;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  float: left;
+  margin-right: 20px;
+}
 
 @keyframes App-logo-spin {
   from {
