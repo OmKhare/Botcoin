@@ -149,16 +149,18 @@ const myKey = ec.keyFromPrivate('04f95a219ee9e01ce14a90b4e3afd7d9e74bc4eac8049c0
 const myWalletAddress = myKey.getPublic('hex');
 
 let botcoin = new Blockchain();
-const tx1 = new Transaction(myWalletAddress, 'public key', 10);
+const tx1 = new Transaction(myWalletAddress, 'public key1', 10);
 tx1.signTransaction(myKey)
 botcoin.addTransaction(tx1);
 
 botcoin.minePendingTransactions(myWalletAddress);
 
-const tx2 = new Transaction(myWalletAddress, 'public key', 10);
+const tx2 = new Transaction(myWalletAddress, 'public key2', 10);
 tx2.signTransaction(myKey)
 botcoin.addTransaction(tx2);
 
 botcoin.minePendingTransactions(myWalletAddress);
 
-export default botcoin;
+console.log(JSON.stringify(botcoin, null, 4));
+
+export default botcoin
