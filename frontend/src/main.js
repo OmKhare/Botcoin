@@ -2,7 +2,7 @@ const SHA256 = require('crypto-js/sha256');
 const EC = require('elliptic').ec;
 const ec = new EC('secp256k1')
 
-class Transaction{
+class createTransaction{
  constructor(fromAddress, toAddress, amount){
   this.fromAddress = fromAddress;
   this.toAddress = toAddress;
@@ -53,7 +53,7 @@ class Block{
    this.nonce++;
    this.hash = this.calculateHash();
   }
-  console.log("Block mined " + this.hash);
+  // console.log("Block mined " + this.hash);
  }
 
  hasValidTransaction(){
@@ -83,13 +83,13 @@ class Blockchain{
  }
 
  minePendingTransactions(miningRewardAddress){
-  const rewardTx = new Transaction(null, miningRewardAddress, this.miningReward);
+  const rewardTx = new createTransaction(null, miningRewardAddress, this.miningReward);
   this.pendingTransactions.push(rewardTx);
   
   let block = new Block(Date.now(), this.pendingTransactions, this.getLatestBlock().hash);
   block.mineBlock(this.difficulty);
 
-  console.log('Block successfully mined');
+  // console.log('Block successfully mined');
   this.chain.push(block);
 
   this.pendingTransactions = [];
@@ -149,18 +149,19 @@ const myKey = ec.keyFromPrivate('04f95a219ee9e01ce14a90b4e3afd7d9e74bc4eac8049c0
 const myWalletAddress = myKey.getPublic('hex');
 
 let botcoin = new Blockchain();
-const tx1 = new Transaction(myWalletAddress, 'public key1', 10);
+const tx1 = new createTransaction(myWalletAddress, 'public key1', 10);
 tx1.signTransaction(myKey)
 botcoin.addTransaction(tx1);
 
 botcoin.minePendingTransactions(myWalletAddress);
 
-const tx2 = new Transaction(myWalletAddress, 'public key2', 10);
+const tx2 = new createTransaction(myWalletAddress, 'public key2', 10);
 tx2.signTransaction(myKey)
 botcoin.addTransaction(tx2);
 
 botcoin.minePendingTransactions(myWalletAddress);
 
-console.log(JSON.stringify(botcoin, null, 4));
+// console.log(JSON.stringify(botcoin, null, 4));
 
-export default botcoin
+export default {botcoin, createTransaction, myKey, myWalletAddress};
+

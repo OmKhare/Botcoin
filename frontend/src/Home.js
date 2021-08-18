@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import botcoin from './main';
+import axios from 'axios'
 
 function Home() {
+  const [coin, setCoin] = useState(botcoin.botcoin.chain)
+  useEffect(()=>{
+    fetch("/coins").then(res => {
+      if(res.ok){
+        return res.json()
+      }
+    }).then(jsonRes => setCoin(jsonRes[0].chain));
+  })
+    
   let chains = [];
-
   const [ind, setInd] = useState(0)
 
-  for (var i = 0; i < botcoin.chain.length; i++) {
-    chains.push(botcoin.chain[i]);
+  // console.log(botcoin.botcoin.chain)
+
+  for (var i = 0; i < coin.length; i++) {
+    chains.push(coin[i]);
   }
 
   const [transaction, setTransaction] = useState('null');
@@ -26,10 +37,10 @@ function Home() {
             <li class="list-group-item">
               <span class="head">Hash</span><br/>
               <div class="text-truncate1">
-                <small >{chain.hash}</small>
+                <small style={{color:'#' + chain.hash.substring(0,6)}}>{chain.hash}</small>
               </div>
               <span class="head">Hash of previous block</span><br/>
-              <div class="text-truncate1"><small>{chain.previousHash}</small></div>
+              <div class="text-truncate1" style={{color:'#' + chain.previousHash.substring(0,6)}}><small>{chain.previousHash}</small></div>
             </li>
             <li class="list-group-item">
               <span class="head">Nonce</span><br />
